@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { AuthService } from './service';
 import { verifyToken } from './utils';
 
@@ -7,6 +7,11 @@ describe('Authentication Service', () => {
     email: 'test@example.com',
     password: 'SecurePass123!'
   };
+
+  beforeEach(() => {
+    // Reset the mock user database before each test
+    (AuthService as any).resetUsers();
+  });
 
   it('should register a new user', async () => {
     const token = await AuthService.register(testUser);
