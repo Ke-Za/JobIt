@@ -2,7 +2,7 @@ import { EmailLoginCredentials } from './config';
 import { hashPassword, verifyPassword, generateToken } from './utils';
 
 // Mock User Database (In a real app, this would be a PostgreSQL database)
-const users: Array<{ id: string; email: string; password: string }> = [];
+let users: Array<{ id: string; email: string; password: string }> = [];
 
 export class AuthService {
   static async register(credentials: EmailLoginCredentials): Promise<string> {
@@ -47,5 +47,10 @@ export class AuthService {
 
     // Generate token
     return generateToken(user.id);
+  }
+
+  // For testing purposes: Reset the user database
+  static resetUsers(): void {
+    users = [];
   }
 }
